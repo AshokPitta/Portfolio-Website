@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashok Kumar Pitta — ML Engineer & Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f18;
+    --bg3: #14141f;
+    --surface: #1a1a28;
+    --surface2: #20202f;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #7c6ef7;
+    --accent2: #a594fa;
+    --accent3: #3ecfcf;
+    --text: #e8e6f0;
+    --muted: #8a87a0;
+    --muted2: #5c5a6e;
+    --green: #3ecfcf;
+    --amber: #f5c842;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent2); }
+  nav ul {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(124,110,247,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,110,247,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 100%);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,110,247,0.12) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(62,207,207,0.08) 0%, transparent 70%);
+    bottom: 50px; right: 100px;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent3);
+    letter-spacing: 0.1em;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px;
+    background: var(--accent3);
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+  }
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-title span {
+    color: var(--accent2);
+    font-weight: 400;
+  }
+  .hero-desc {
+    max-width: 580px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost {
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent2); background: rgba(124,110,247,0.05); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-val span { color: var(--accent2); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
+
+  /* SECTION LAYOUT */
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent3);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  /* ABOUT */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .tag {
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+  }
+  .about-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .info-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+  .info-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    background: rgba(124,110,247,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .info-label { font-size: 0.75rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-val { font-size: 0.9rem; color: var(--text); margin-top: 0.15rem; }
+
+  /* SKILLS */
+  #skills { background: var(--bg); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .skill-cat {
+    background: var(--bg3);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+  .skill-cat:hover { background: var(--surface); }
+  .skill-cat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .skill-pills {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .skill-pill {
+    padding: 0.25rem 0.65rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 0.8rem;
+    color: var(--text);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-cat:hover .skill-pill {
+    border-color: rgba(124,110,247,0.25);
+    color: var(--text);
+  }
+  .skill-pill.highlight {
+    border-color: rgba(124,110,247,0.4);
+    color: var(--accent2);
+    background: rgba(124,110,247,0.08);
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--bg2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    background: var(--bg3);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+    cursor: default;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .project-bullets { padding-left: 0; list-style: none; }
+  .project-bullets li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 0.35rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-bullets li:last-child { border-bottom: none; }
+  .project-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent2);
+    font-size: 0.8rem;
+  }
+  .project-tech {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+  .tech-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    background: rgba(124,110,247,0.1);
+    border: 1px solid rgba(124,110,247,0.2);
+    border-radius: 2px;
+    color: var(--accent2);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg); }
+  .experience-block {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg3);
+    overflow: hidden;
+  }
+  .exp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 2rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--accent2);
+    font-weight: 400;
+  }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted2);
+    white-space: nowrap;
+    margin-top: 0.25rem;
+    text-align: right;
+  }
+  .exp-location {
+    font-size: 0.8rem;
+    color: var(--muted2);
+    text-align: right;
+  }
+  .exp-bullets {
+    list-style: none;
+    padding: 1.75rem 2.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .exp-bullets li {
+    display: flex; gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    color: var(--accent2);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--bg2); }
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading span { color: var(--accent2); }
+  .contact-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 0.9rem;
+  }
+  .contact-link:hover { border-color: var(--accent2); background: rgba(124,110,247,0.05); }
+  .contact-link-icon {
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    background: rgba(124,110,247,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .contact-link-label { font-size: 0.7rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-link-val { color: var(--text); margin-top: 0.1rem; font-size: 0.88rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.75rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; }
+  .form-group input,
+  .form-group textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent2); }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--muted2); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted2);
+  }
+  .footer-back {
+    font-size: 0.8rem;
+    color: var(--muted2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-back:hover { color: var(--accent2); }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Cursor dot */
+  .cursor-dot {
+    position: fixed;
+    width: 6px; height: 6px;
+    background: var(--accent2);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.25rem; }
+    #hero { padding: 6rem 1.5rem 3rem; }
+    .section-inner { padding: 4rem 1.5rem; }
+    .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AK<span>.</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-eyebrow">Available for opportunities</div>
+
+  <h1 class="hero-name">
+    Ashok Kumar<br>
+    <span class="line2">Pitta</span>
+  </h1>
+
+  <div class="hero-title">
+    <span>Python Developer</span> · ML Engineer · Data Scientist
+  </div>
+
+  <p class="hero-desc">
+    Building end-to-end ML solutions, scalable ETL pipelines, and data-driven products that translate complex data into measurable business outcomes.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
+    <a href="mailto:ashokkumarpitta555@gmail.com" class="btn-ghost" style="border-color: rgba(62,207,207,0.3); color: var(--accent3);">ashokkumarpitta555@gmail.com</a>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-val">2<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div>
+      <div class="stat-val">5<span>+</span></div>
+      <div class="stat-label">ML Solutions Shipped</div>
+    </div>
+    <div>
+      <div class="stat-val">3<span>+</span></div>
+      <div class="stat-label">Core Domains</div>
+    </div>
+    <div>
+      <div class="stat-val" style="color: var(--accent3);">Open</div>
+      <div class="stat-label">To New Roles</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm a <strong>Data Scientist & ML Engineer</strong> with 2 years of industry experience building end-to-end machine learning solutions, scalable ETL pipelines, and data-driven products.</p>
+        <p>Skilled in Python, SQL, statistical experimentation, and production model deployment, I'm passionate about applying machine learning to <strong>high-impact domains</strong> including fraud detection, risk modelling, customer behaviour analysis, and pricing strategy.</p>
+        <p>I have a proven track record of translating complex data into non-technical insights and <strong>collaborating across Product, Engineering, and Commercial teams</strong> to drive measurable business outcomes.</p>
+        <div class="about-tags">
+          <span class="tag">Fraud Detection</span>
+          <span class="tag">Risk Modelling</span>
+          <span class="tag">Customer Behaviour</span>
+          <span class="tag">Pricing Strategy</span>
+          <span class="tag">Production ML</span>
+          <span class="tag">Stakeholder Comms</span>
+        </div>
+      </div>
+      <div class="about-info fade-in">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-val">Sheffield, UK</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-val">07379 252988</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🔗</div>
+          <div>
+            <div class="info-label">LinkedIn</div>
+            <div class="info-val"><a href="https://linkedin.com/in/ashok-pitta-ai" style="color: var(--accent2); text-decoration: none;">linkedin.com/in/ashok-pitta-ai</a></div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-val"><a href="mailto:ashokkumarpitta555@gmail.com" style="color: var(--accent2); text-decoration: none;">ashokkumarpitta555@gmail.com</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills & Tech Stack</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-cat">
+        <div class="skill-cat-label">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill highlight">Python</span>
+          <span class="skill-pill highlight">SQL</span>
+          <span class="skill-pill">Java</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">ML & AI</div>
+        <div class="skill-pills">
+          <span class="skill-pill highlight">TensorFlow</span>
+          <span class="skill-pill highlight">PyTorch</span>
+          <span class="skill-pill">Scikit-learn</span>
+          <span class="skill-pill highlight">LLMs</span>
+          <span class="skill-pill">RAG</span>
+          <span class="skill-pill">NLP</span>
+          <span class="skill-pill">A/B Testing</span>
+          <span class="skill-pill">Statistical Testing</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Data Engineering</div>
+        <div class="skill-pills">
+          <span class="skill-pill highlight">ETL Pipelines</span>
+          <span class="skill-pill">PySpark</span>
+          <span class="skill-pill">Data Modelling</span>
+          <span class="skill-pill">dbt</span>
+          <span class="skill-pill">BigQuery</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Frameworks & APIs</div>
+        <div class="skill-pills">
+          <span class="skill-pill highlight">FastAPI</span>
+          <span class="skill-pill">Flask</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Microservices</span>
+          <span class="skill-pill">API Gateway</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Tools & Cloud</div>
+        <div class="skill-pills">
+          <span class="skill-pill highlight">Power BI</span>
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">NumPy</span>
+          <span class="skill-pill">AWS</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Jupyter</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label">Soft Skills</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Stakeholder Comms</span>
+          <span class="skill-pill">Agile Delivery</span>
+          <span class="skill-pill">Cross-functional</span>
+          <span class="skill-pill">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Technical Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card fade-in">
+        <div class="project-type">Finance · LLM · RAG</div>
+        <div class="project-name">Finance RAG Framework</div>
+        <p class="project-desc">Modular Python pipelines for document retrieval and LLM-based response generation, enabling accurate and contextually grounded outputs at scale for financial document types.</p>
+        <ul class="project-bullets">
+          <li>Built API-driven architecture aligned pipelines using transformer-based models for document retrieval and LLM response generation</li>
+          <li>Implemented structured evaluation workflows validating model responses against quality metrics for production-grade reliability</li>
+          <li>Ensured consistent performance across diverse financial document types at scale</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">LLMs</span>
+          <span class="tech-tag">RAG</span>
+          <span class="tech-tag">Transformers</span>
+          <span class="tech-tag">FastAPI</span>
+        </div>
+      </div>
+      <div class="project-card fade-in" style="transition-delay: 0.1s">
+        <div class="project-type">Forecasting · ML · BigData</div>
+        <div class="project-name">Web Traffic Forecasting Platform</div>
+        <p class="project-desc">Automated prediction pipelines over large-scale datasets using clustering and adaptive forecasting, producing reliable traffic forecasts that supported data-driven planning.</p>
+        <ul class="project-bullets">
+          <li>Developed automated pipelines using clustering and adaptive forecasting to reduce prediction error and improve scalability</li>
+          <li>Designed data processing workflows handling high-volume inputs efficiently for stakeholder planning decisions</li>
+          <li>Applied rigorous model validation to ensure production-grade reliability</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">PySpark</span>
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">ETL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="experience-block fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Python Developer / Data Scientist</div>
+          <div class="exp-company">Powered IT Solutions Pvt. Ltd.</div>
+        </div>
+        <div>
+          <div class="exp-date">May 2022 – Jun 2024</div>
+          <div class="exp-location">Hyderabad, India</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built and validated machine learning models for risk assessment and customer behaviour analysis, applying cross-validation, statistical significance testing, and A/B testing frameworks to improve prediction reliability across business-critical use cases.</li>
+        <li>Designed and deployed fraud detection-ready ML pipelines into production environments using REST APIs and microservices on AWS, reducing manual intervention and enabling real-time decision-making.</li>
+        <li>Developed robust ETL pipelines and data validation frameworks using Python, SQL, and PySpark — improving data accuracy across datasets to support pricing analysis, risk modelling, and operational reporting.</li>
+        <li>Delivered interactive Power BI dashboards and translated complex model outputs into clear, non-technical insights for Product, Engineering, and Commercial stakeholders, driving wider adoption of data-driven decision making.</li>
+        <li>Applied experimentation and behavioural analytics to analyse user behaviour, conversion trends, and product performance, generating actionable insights for product optimisation and growth strategies.</li>
+        <li>Collaborated cross-functionally with Product, Engineering, and Commercial teams to scope, build, and iterate on data models and analytics solutions aligned to business goals.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="fade-in">
+        <div class="contact-heading">Let's build something <span>together.</span></div>
+        <p class="contact-sub">Open to data science, ML engineering, and Python developer roles. Always happy to discuss interesting problems in fraud detection, NLP, or production ML systems.</p>
+        <div class="contact-links">
+          <a href="mailto:ashokkumarpitta555@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-val">ashokkumarpitta555@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:07379252988" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            <div>
+              <div class="contact-link-label">Phone</div>
+              <div class="contact-link-val">07379 252988</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/ashok-pitta-ai" class="contact-link" target="_blank">
+            <div class="contact-link-icon">in</div>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-val">linkedin.com/in/ashok-pitta-ai</div>
+            </div>
+          </a>
+          <div class="contact-link" style="cursor: default;">
+            <div class="contact-link-icon">📍</div>
+            <div>
+              <div class="contact-link-label">Location</div>
+              <div class="contact-link-val">Sheffield, United Kingdom</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.15s;">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" placeholder="jane@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" placeholder="Tell me about the opportunity or project..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; text-align: center; border: none; cursor: pointer;">Send Message</button>
+          <div id="form-msg" style="font-size: 0.85rem; color: var(--accent3); display: none; text-align: center; margin-top: 0.5rem;">
+            ✓ Message noted — please reach out directly via email to send.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Ashok Kumar Pitta · Sheffield, UK</div>
+  <a href="#hero" class="footer-back">↑ Back to top</a>
+</footer>
+
+<script>
+  // Nav smooth scroll — works in iframes and browsers
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Cursor dot
+  const dot = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-msg').style.display = 'block';
+    e.target.reset();
+  }
+</script>
+</body>
+</html>
